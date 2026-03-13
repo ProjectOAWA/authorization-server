@@ -1,1 +1,1 @@
-# authorization-server
+# Authorization Server
