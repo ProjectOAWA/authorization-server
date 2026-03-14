@@ -11,8 +11,15 @@ export function register(app: Express) {
     })
 
     // OAuth 2.1
-    app.get(OAuth.endpoint, [OAuth.validate, OAuth.session.start])
-
+    // Setup, then redirect to frontend (no params)
+    // TODO: This could be way nicer using SSR or making the login page its own 
+    //       service, served from the backend 
+    app.get(OAuth.endpoint, [
+        OAuth.validate,
+        OAuth.session.start, 
+        (_req: Request, res: Response) => { res.sendStatus(200) },
+    ]);
+    
     // WebAuthn
     app.post("/webauthn/register/options", [OAuth.session.link, WebAuthn.register.getOptions])
     app.post("/webauthn/login/options", [OAuth.session.link, WebAuthn.login.getOptions])

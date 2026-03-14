@@ -5,7 +5,7 @@ const isAnalyzeFlagSet = process.argv.includes("--analyze");
 
 build({
 	entryPoints: ["src/index.ts"],
-	outfile: "../build/index.js",
+	outfile: "./build/index.js",
 	bundle: true,
 	platform: "node",
 	target: "node24",
@@ -30,7 +30,7 @@ build({
 
 	// Save the metafile
 	const fs = require('fs');
-	fs.writeFileSync('../build/artifacts/backend.metafile.json', JSON.stringify(result.metafile));
+	fs.writeFileSync('./build/artifacts/backend.metafile.json', JSON.stringify(result.metafile));
 	console.log("✅ Exported metafile")
 })
 .then(() => console.log("✅ Build succeeded"))

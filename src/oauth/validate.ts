@@ -13,6 +13,7 @@ export type ValidatedRequest = Request & { oauth: AuthorizationRequest };
  */
 export function validate(req: Request, res: Response, next: NextFunction) {
     const result = Schema.safeParse(req.query);
+    console.log("Query: ", req.query)
 
     if(!result.success) {
         console.error(chalk.bold.red("❌ Invalid OAuth parameters"));
