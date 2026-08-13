@@ -3,7 +3,7 @@ name: Package
 
 on:
   push:
-    branches-ignore: [main]
+    # branches-ignore: [main]
   workflow_dispatch:
 
 concurrency:
@@ -65,7 +65,7 @@ jobs:
         uses: docker/build-push-action@v7.3.0
         with:
           context: .
-          target: standalone
+          target: production
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
