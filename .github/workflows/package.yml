@@ -32,12 +32,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          # Include submodules (none currently used)
-          submodules: recursive
+        # with:
+        #   # Include submodules (none currently used)
+        #   submodules: recursive
 
-      # GHCR rejects uppercase names, and the attestation subject must match
-      # the pushed reference exactly (metadata-action lowercases on its own)
       - name: Lowercase image name
         run: echo "IMAGE_NAME=$(echo '${{ env.IMAGE_NAME }}' | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_ENV"
 
@@ -81,7 +79,6 @@ jobs:
         with:
           subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           subject-digest: ${{ steps.build.outputs.digest }}
-          sbom-path: 'sbom.json'
           push-to-registry: true
 
       # Output to summary tab
