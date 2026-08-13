@@ -53,7 +53,7 @@ jobs:
       # Make image name
       - name: Derive tags and labels
         id: meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6.2.0
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
@@ -79,7 +79,7 @@ jobs:
         with:
           subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           subject-digest: ${{ steps.build.outputs.digest }}
-          # sbom-path: 'sbom.json'
+          sbom-path: 'sbom.json'
           push-to-registry: true
 
       - name: Summary
